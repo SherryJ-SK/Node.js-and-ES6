@@ -1,0 +1,19 @@
+{
+  "name": "11-stu_package.json",
+  "version": "1.0.0",
+  "description": "In this activity, you will install your application dependencies using the command `npm install` or `npm i`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm",
+    "install"
+  ],
+  "author": "You!",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "inquirer": "^6.5.2"
+  }
+}
