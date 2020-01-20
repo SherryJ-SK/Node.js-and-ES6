@@ -25,9 +25,11 @@ const colors = {
   }
 };
 
-const createHtml =
-  function generateHTML(data) {
-    return `<!DOCTYPE html>
+function generateHTML(data) {
+  console.log(data);
+  console.log(data.color);
+
+  return `<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -173,10 +175,9 @@ const createHtml =
          }
       </style>
       </head>
+      
       `
-  }
 
-module.exports = {
-  colors: colors,
-  createHtml: createHtml
 }
+
+module.exports = generateHTML;
