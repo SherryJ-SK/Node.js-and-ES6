@@ -26,8 +26,9 @@ const colors = {
 };
 
 function generateHTML(data) {
+  //console.log( data);
 
-  return `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -193,6 +194,9 @@ function generateHTML(data) {
       </body>
       </html>  
       `
+
+      // console.log(html);
+      return html;
 }
 
 module.exports = generateHTML;

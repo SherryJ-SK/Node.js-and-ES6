@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
-const htmlJS = require("./generateHTML");
+const generateHTML = require("./generateHTML");
 const fs = require("fs");
 convertFactory = require("electron-html-to");
 
@@ -28,18 +28,32 @@ userInfo()
     .then(function ({ github, color }) {
         api
             .getUser(github)
-            .then(function (res) {
-                api.getStars(github)
-                    .then(function (stars) {
-                        htmlJS({ stars, color, ...res.data });
-                    })
-            });
+            .then( (res)=> {
+                // console.log("line 32")
+                // api.getStars(github)                    
+                        return generateHTML({color, ...res.data });
+
+                    // .then(conversion({ htmlJS }), function (err) {
+                    //     if (err) {
+                    //         throw err;
+                    //     };
+                    //     console.log(result.numberOfPages);
+                    //     console.log(result.log);
+                    //     result.stream.pipe(fs.createWriteStream('./html.pdf'));
+                    // });                
+            })
+            .then((htmlData) => {
+                console.log(htmlData);
+
+            })
+
     })
-    .then({ htmlJS }, function (err) {
-        if (err) {
-            return console.error(err);
-        }
-    })
+    // .catch(function (err) {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    // })
+
 api = {
     getUser: function (github) {
         return axios.get(`https://api.github.com/users/${github}`)
@@ -48,3 +62,4 @@ api = {
         return axios.get(`https://api.github.com/users/${github}/repos`)
     }
 }
+
