@@ -2,8 +2,7 @@ const inquirer = require("inquirer");
 const axios = require("axios");
 const generateHTML = require("./generateHTML");
 const fs = require("fs");
-convertFactory = require("electron-html-to");
-
+const convertFactory = require("electron-html-to");
 
 const questions = [
     {
@@ -25,40 +24,36 @@ inquirer.prompt(questions)
         api
             .getUser(github)
             .then((res) => {
-                // console.log("line 32")
+                api.getStars(github).then(function (response) {
+                    const starNumber = [];
+                    const starResponse = response.data;
+                    starResponse.forEach(function (starResponse) {
+                        starNumber.push(starResponse.stargazers_count);
+                    })
+                    const reducer = (total, num) => total += num;
+                    const starCount = starNumber.reduce(reducer);
+                    // return generateHTML({ starCount, color, ...res.data });
+                    const htmlData = generateHTML({ starCount, color, ...res.data });
 
-                return generateHTML({ color, ...res.data });
-
-            })
-            .then((htmlData) => {
-                // console.log("line 34");
-                // const conversion = convertFactory({
-                //     converterPath: convertFactory.converters.PDF
-                // });
-                // conversion({ htmlData }, function (err, result) {
-                //     if (err) {
-                //         return console.error(err);
-                //     }
-                //     console.log(result.logs);
-                //     result.stream.pipe(fs.createWriteStream("./html.pdf"));
-                // });
-            })
-            .then(api.getStars(github).then(function (res) {
-                // console.log("line 47");
-                const starResponse = res.data;
-
-                starResponse.forEach(function (starResponse) {
-                    console.log(starResponse.stargazers_count);
+                    function convertToPDF(htmlData) {
+                        const conversion = convertFactory({
+                            converterPath: convertFactory.converters.PDF
+                        });
+                        conversion({ html: htmlData }, function (err, result) {
+                            if (err) {
+                                return console.error(err);
+                            }
+                            // console.log(result.logs);
+                            result.stream
+                                .pipe(fs.createWriteStream("./html.pdf"));
+                            conversion.kill();
+                            console.log("PDF file has been created.");
+                        })
+                    };
+                    convertToPDF(htmlData);
                 })
-            }));
+            });
     })
-
-
-// .catch(function (err) {
-//     if (err) {
-//         console.log(err);
-//     }
-// })
 
 api = {
     getUser: function (github) {
@@ -68,12 +63,3 @@ api = {
         return axios.get(`https://api.github.com/users/${github}/repos`)
     }
 }
-
-    // console.log("stars");
-    // const totalStars = data.reduce(function (accumulator, stargazers_count) {
-    //     return accumulator + { stargazers_count };
-    // }, 0);
-    // console.log(totalStars);
-
-
-

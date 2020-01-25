@@ -27,8 +27,8 @@ const colors = {
 
 function generateHTML(data) {
   // console.log(data);
-
-  const html = `<!DOCTYPE html>
+  const html =
+    `<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -177,14 +177,14 @@ function generateHTML(data) {
       <body>
       <div class="jumbotron jumbotron-fluid">
       <div class="container">
-      <img href=${[data.avatar_id]} alt="avatar>
-      <h1 class="display-4">Hi! My name is ${[data.login]}</h1>
+      <img src=${[data.avatar_id]} alt="avatar" class="photo-header">
+      <h1 class="display-4">Hi! My name is ${[data.name]}</h1>
       <p class="lead">I am from ${[data.location]}.</p>
       <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
       <ul class="list-group">
         <li class="list-group-item">My GitHub username is ${[data.login]}</li>
         <li class="list-group-item">GitHub Link: ${[data.url]}</li>
-        <li class="list-group-item">Starred: ${[data.stargazers_count]}</li>
+        <li class="list-group-item">Starred: ${[data.starCount]}</li>
         <li class="list-group-item">Number of repos: ${[data.public_repos]}</li>
         <li class="list-group-item">Followers: ${[data.followers]}</li>
         <li class="list-group-item">Following: ${[data.following]}</li>
@@ -194,9 +194,8 @@ function generateHTML(data) {
       </body>
       </html>  
       `
-
-      // console.log(html);
-      return html;
+  // console.log(html);
+  return html;
 }
 
 module.exports = generateHTML;
