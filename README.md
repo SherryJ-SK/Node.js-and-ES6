@@ -1,5 +1,5 @@
 # Profile Generator - Node.js and ES6+
-![pdf image](assets/image/pdf.png)
+![pdf image](assets/img/pdf.png)
 
 ## Description
 This command-line application collect user information from the GitHub by entrying GitHub username, and then generates a PDF profile. This application is using Node.js and ES6+, and it is invoked with the command:
@@ -26,4 +26,4 @@ To generate the PDF profile, the user can enter the GitHub username and the colo
 4. Choose the preferred color, which will display on the PDF
 5. A PDF will be generated and stored in the same folder with the index.js file. 
 
-[Back to the top](# Profile Generator - Node.js and ES6+)
+[Top](#image)
